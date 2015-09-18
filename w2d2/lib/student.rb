@@ -12,27 +12,32 @@ class Student
   end
   
   def enroll(course)
-    unless courses.include?(course) && student.has_conflict?
-      courses << course
-      course.students << self
+  
+    if @courses.include?(course)
+      return nil
     end
-    raise
+    if has_conflict?(course)
+      raise "course causes conflict!"
+    end
+    @courses << course
+    course.students << self
   end
   
   def course_load
-    course_load = {}
+    course_load = Hash.new(0)
     courses.each do |course|
-    if course_load[course.department] == nil
-      course_load[course.department] = course.credits
-    else
       course_load[course.department] += course.credits
-    end
     end
     course_load
   end
   
-  def has_conflict(course)
-    courses.each {|other_course| course.conflicts_with?(other_course)}
+  def has_conflict?(course)
+    courses.each do |other_course| 
+      if other_course.conflicts_with?(course)
+        return true
+      end
+    end
+    false
   end
-    
+  
 end

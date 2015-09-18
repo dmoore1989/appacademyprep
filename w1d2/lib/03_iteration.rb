@@ -119,7 +119,7 @@ end
 # array with the original elements multiplied by two.
 
 def doubler(array)
-  double =  array.map { |x| x * 2 }
+  array.map { |x| x * 2 }
 end
 
 # ### My Each

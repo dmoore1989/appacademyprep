@@ -71,9 +71,9 @@ describe XmlDocument do
 
     expect(xml_string).to eq(
       "<hello>\n" +
-      "  <goodbye>\n" +
-      "   <come_back>\n" +
-      "    <ok_fine be=\"that_way\"/>\n" +
+      " <goodbye>\n" +
+      "  <come_back>\n" +
+      "   <ok_fine be=\"that_way\"/>\n" +
       "  </come_back>\n" +
       " </goodbye>\n" +
       "</hello>\n"

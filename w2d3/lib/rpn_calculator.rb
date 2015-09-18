@@ -57,7 +57,9 @@ class RPNCalculator
           value_calc.push(calculator[index])
           index += 1
         end
-        return value_calc.value if value_calc.calculator.any?{|x| OPERATIONS.include?(x)}
+        if value_calc.calculator.any?{|x| OPERATIONS.include?(x)}
+          return value_calc.value 
+        end
       else
         value_calc.push(@calculator[index])
         index += 1

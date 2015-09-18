@@ -1,35 +1,26 @@
 class XmlDocument
   
   def method_missing(method_name, options = {}, &prc)
+    final = ''
     if options.empty? && prc.nil?
-      final = ""
       final << "<#{method_name}/>"
-      @counter += 1
-      final << indentation
-      final
     elsif prc.nil?
-      final = ""
-      final << options.map{|key, value| "<#{method_name} #{key}=\"#{value}\"/>"}.join("")
-      @counter += 1
-      final << indentation
-      final
+      final << print_option(method_name, options)
+      final << next_line
     else
-      final = ""
       if options.empty?
         final << "<#{method_name}>"
-        @counter += 1
-        final << indentation
-      else  
-        final << options.map{|key, value| "<#{method_name} #{key}=\"#{value}\">"}.join("")
-        @counter += 1
-        final << indentation
       end
-      final << prc.call
-      @counter -= 1
-      final << "</#{method_name}>"
+      @counter += 1
+      final << next_line
       final << indentation
-      final
+      final << prc.call
+      @counter -= 1 
+      final << indentation
+      final << "</#{method_name}>"
+      final << next_line
     end
+    final
   end
   
   def initialize(indent = false)
@@ -37,9 +28,14 @@ class XmlDocument
     @counter = 0
   end
   
+  def next_line
+    return "\n" if @indent == true
+    ""
+  end
+  
   def indentation
     if @indent == true
-      "\n#{white_space}"
+      "#{white_space}"
     else
       ""
     end
@@ -47,5 +43,12 @@ class XmlDocument
   
   def white_space
     " " * @counter
+  end
+  
+  def print_option(method_name, option)
+    output = option.map do |key, value|
+      "<#{method_name} #{key}=\"#{value}\"/>"
+    end
+    output.join('')
   end
 end

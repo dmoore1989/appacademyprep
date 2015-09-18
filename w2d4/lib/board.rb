@@ -1,5 +1,5 @@
 class Board
-  attr_reader :grid :marks
+  attr_reader :grid, :marks
   
   def initialize(grid = nil)
     @grid = grid.nil? ? Array.new(3) { Array.new(3) } : grid

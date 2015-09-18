@@ -53,7 +53,7 @@ class Course
   attr_accessor :name, :department, :credits, :students, :days, :time_block
   
 
-  def initialize(name, department, credits, days, time_block)
+  def initialize(name, department, credits, days = nil, time_block = nil)
     @name = name
     @department = department
     @credits = credits
@@ -77,8 +77,5 @@ class Course
     false
   end
   
-  def students
-    @students
-  end  
 
 end
