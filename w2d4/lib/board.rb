@@ -48,13 +48,7 @@ class Board
   end
   
   def over?
-    if !winner.nil?
-      true
-    elsif filled?
-      true
-    else
-      false
-    end
+   !winner.nil? || filled?
   end
 
   def filled?

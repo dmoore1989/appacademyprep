@@ -1,8 +1,6 @@
 class Friend
   def greeting(name = nil)
-    if name == nil
-      return "Hello!"
-    end
+    return "Hello!" if name == nil
     "Hello, #{name}!"
   end
 end

@@ -18,12 +18,7 @@ class Dictionary
   end
   
   def include?(keyword)
-    @entries.keys.each do |word|
-      if keyword == word
-        return true
-      end
-    end
-    false
+    @entries.keys.any? { |word| keyword == word}
   end
   
   def find(lookup)

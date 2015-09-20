@@ -100,5 +100,37 @@ describe MyHashSet do
         )
       end
     end
+    
+    describe "#symmetric_difference" do
+      it "returns a new set" do
+        expect(set1.symmetric_difference(set2)).to be_a(MyHashSet)
+      end
+      
+      it "returns a set containing elements in set1 or set2 but not both" do
+        els = set1.symmetric_difference(set2).to_a
+        
+        expect(els).to contain_exactly(
+          "Mark Hamill",
+          "Harrison Ford",
+          "Ewan McGregor",
+          "Natalie Portman"  
+        )
+      end
+    end
+    
+    describe "==(object)" do
+      it "returns false for a non MyHashSet object" do
+        string = ""
+        expect(set1==(string)).to be_falsey
+      end
+    
+      it "returns false for a different MyHashSet" do
+        expect(set1==(set2)).to be_falsey
+      end
+      
+      it "returns true for an equivalent MyHashSet" do
+        expect(set1==(set1)).to be_truthy
+      end
+    end
   end
 end

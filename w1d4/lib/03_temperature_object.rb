@@ -1,14 +1,13 @@
-require 'byebug'
+
 
 class Temperature
- 
   
   def Temperature.from_celsius(temp)
-    Temperature.new(c:temp)
+    Celsius.new(temp)
   end
   
   def Temperature.from_fahrenheit(temp)
-    Temperature.new(f:temp)
+    Fahrenheit.new(temp)
   end
     
   
@@ -17,7 +16,6 @@ class Temperature
   end
   
   def in_fahrenheit
-    debugger
     if @temp_option.keys.include?(:f)
       @temp_option[:f]
     else
@@ -32,4 +30,21 @@ class Temperature
       ((@temp_option[:f] - 32) * 5.0) / 9.0
     end
   end
+  
+
+end
+
+class Celsius < Temperature
+  def initialize(temp)
+    @temp_option = {:c => temp}
+  end
+  
+end
+
+class Fahrenheit < Temperature
+  def initialize(temp)
+    @temp_option = {:f => temp}
+  end
+  
+    
 end

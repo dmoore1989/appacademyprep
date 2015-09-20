@@ -82,6 +82,28 @@ class MyHashSet
     end
     minus_hash
   end
+  
+  def symmetric_difference(other_set)
+    sym_diff_hash = MyHashSet.new
+    self.to_a.each do |el1|
+      sym_diff_hash.insert(el1) unless other_set.to_a.include?(el1)
+    end
+    other_set.to_a.each do |el2|
+      sym_diff_hash.insert(el2) unless self.to_a.include?(el2)
+    end
+    sym_diff_hash
+  end
+  
+  def ==(object)
+    return false unless object.is_a?(MyHashSet)
+    self.to_a.each do |el1|
+      return false unless object.to_a.include?(el1)
+    end
+    object.to_a.each do |el2|
+      return false unless self.to_a.include?(el2)
+    end
+  end
+  
 end
 
 # Bonus

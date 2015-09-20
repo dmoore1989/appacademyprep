@@ -84,24 +84,20 @@ class TowersOfHanoi
   end
   
   def won?
-    if @towers == [[], [3, 2, 1], []] || @towers == [[], [], [3,2,1]]
-      true
-    else
-      false
-    end
+    true if @towers == [[], [3, 2, 1], []] || @towers == [[], [], [3,2,1]]
   end
 end
 
 
-# puts "Welcome to Towers of Hanoi!!!"
-# game = TowersOfHanoi.new
-# game.display
-# until game.won?
-#   puts "Please select a tower to take from ( 1, 2, or 3)"
-#   from = gets.chomp.to_i
-#   puts "Please select a tower to move ring to (1, 2, 3)"
-#   to = gets.chomp.to_i
-#   game.move(from - 1, to - 1)
-#   game.display
-# end
-# puts "Boo yah, you just won!"
+puts "Welcome to Towers of Hanoi!!!"
+game = TowersOfHanoi.new
+game.display
+until game.won?
+  puts "Please select a tower to take from ( 1, 2, or 3)"
+  from = gets.chomp.to_i
+  puts "Please select a tower to move ring to (1, 2, 3)"
+  to = gets.chomp.to_i
+  game.move(from - 1, to - 1)
+  game.display
+end
+puts "Boo yah, you just won!"
