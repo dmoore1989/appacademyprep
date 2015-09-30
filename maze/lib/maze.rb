@@ -9,7 +9,7 @@ class Maze
     @position = []
     @counter = 0
     @low_count = nil
-    @grid_solution = []
+    @low_grid = []
   end
 
   # def [](row, col)
@@ -25,8 +25,10 @@ class Maze
     # debugger
     if move_available?("E")
       make_move("E")
-      print_maze
-      clear_maze
+      if @low_count.nil? || @counter < @low_count
+        @low_grid = @grid
+        @low_count = @counter
+      end
     elsif move_available?(" ")
       make_move(" ")
     else
@@ -48,15 +50,11 @@ class Maze
 
   def make_move(value)
     # p "in make move"
-    position_store = @position
-    grid_store = @grid
     test_position(position[0] + 1, position[1], value)
     test_position(position[0], position[1] + 1, value)
     test_position(position[0] - 1, position[1], value)
     test_position(position[0], position[1] - 1, value)
-    @grid = grid_store
-    @position = position_store
-    false
+
   end
 
   def find_next_move
@@ -76,7 +74,7 @@ class Maze
     # p "in print maze"
     # p @grid
     # p @grid_solution
-    @grid.each do |line|
+    @low_grid.each do |line|
       puts line
     end
     puts @low_count
@@ -84,17 +82,11 @@ class Maze
 
   def test_position(row, col, value)
     # p "in test position"
-    grid_store = @grid
-    position_store = @position
     # print_maze
     if self.grid[row][col] == value
       @position  = [row, col]
       @counter += 1
       find_next_move if value == " "
-      true
     end
-    @counter -= 1
-    @grid = grid_store
-    @position = position_store
   end
 end
