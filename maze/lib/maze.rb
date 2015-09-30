@@ -30,11 +30,13 @@ class Maze
     elsif move_available?(" ")
       make_move(" ")
     else
-      return
+      clear_maze
     end
   end
 
   def clear_maze
+    @grid = @grid_copy
+  end
 
 
   def move_available?(value)
@@ -84,7 +86,7 @@ class Maze
     # p "in test position"
     grid_store = @grid
     position_store = @position
-    print_maze
+    # print_maze
     if self.grid[row][col] == value
       @position  = [row, col]
       @counter += 1
