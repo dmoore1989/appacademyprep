@@ -2,7 +2,10 @@ class Maze
   attr_accessor :grid, :position
   
   def initialize(file)
+    @file = file
     @grid = File.readlines(file)
+    @grid_copy = @grid
+    @grid_store = []
     @position = []
     @counter = 0
     @low_count = nil
@@ -18,48 +21,60 @@ class Maze
   # end
   
   def find_solution
-    @position = find_start
     # debugger
-    while true
-      break if make_move("E")
-      make_move(" ")
-      @grid[position[0]][position[1]] = "x"
+    if make_move("E")
+      debugger
+        # debugger
+        @low_count = @counter
+        @grid_solution = @grid
+        print_maze
     end
-    print_maze
+    
+    make_move(" ")
+
   end
   
   def make_move(value)
-    if self.grid[position[0] + 1][position[1]] == value
-      @position  = [position[0] + 1, position[1]]
-    elsif self.grid[position[0]][position[1] + 1] == value
-      @position  = [position[0], position[1] + 1]
-    elsif self.grid[position[0] - 1][position[1]] == value
-      @position  = [position[0] - 1, position[1]]
-    elsif self.grid[position[0]][position[1] - 1] == value
-      @position = [position[0], position[1] - 1]
-    end
-  end  
-      
+    position_store = @position
+    grid_store = @grid
+    test_position(position[0] + 1, position[1], value)
+    test_position(position[0], position[1] + 1, value)
+    test_position(position[0] - 1, position[1], value)
+    test_position(position[0], position[1] - 1, value)
+    @grid = grid_store
+    @position = position_store
+    false
+  end
   
-  def fill_grid(row, col)
-    @position = [row, col]
-    @grid[row][col] = "x"
+  def find_next_move
+    @grid[position[0]][position[1]] = "x"
+    find_solution 
   end
     
-    
   def find_start
-    self.grid.each_with_index do |line, i|
+    @grid.each_with_index do |line, i|
       return [i, line.index("S")] if line.include?("S")
     end
   end
   
-  def finished?
-    grid[position[0]][position[1]] == "E"
-  end
-  
   def print_maze
-    @grid.each do |line|
+    @grid_solution.each do |line|
       puts line
     end
+    puts @low_count
   end
+  
+  def test_position(row, col, value)
+    grid_store = @grid
+    position_store = @position
+    if self.grid[row][col] == value
+      @position  = [row, col]
+      @counter += 1
+      find_next_move if value == " "
+      true
+    end
+    @grid = grid_store
+    @position = position_store
+    false
+  end  
 end

@@ -46,9 +46,7 @@ class MyHashSet
   def delete(el)
     if self.store.include?(el)
       @store.delete(el)
-      return true
-    else
-      return false
+     
     end
   end
     
@@ -96,12 +94,7 @@ class MyHashSet
   
   def ==(object)
     return false unless object.is_a?(MyHashSet)
-    self.to_a.each do |el1|
-      return false unless object.to_a.include?(el1)
-    end
-    object.to_a.each do |el2|
-      return false unless self.to_a.include?(el2)
-    end
+    self.to_a == object.to_a
   end
   
 end

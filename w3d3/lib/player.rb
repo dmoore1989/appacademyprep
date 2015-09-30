@@ -18,3 +18,22 @@ class HumanPlayer
     [row, collum]
   end
 end
+
+class ComputerPlayer < HumanPlayer
+  
+  def initialize(name)
+    @name = name
+    @comp_arr = []
+  end
+  
+  def get_play
+    row = nil
+    col = nil
+    until @comp_arr.include?([row, col])
+      row = rand(10)
+      col = rand(10)
+      @comp_arr << [row,col]
+    end  
+    [row, col]
+  end  
+end

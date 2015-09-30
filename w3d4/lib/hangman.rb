@@ -103,5 +103,5 @@ class ComputerPlayer
 end
 
 class HumanPlayer < ComputerPlayer
-
+  
 end

@@ -7,11 +7,8 @@ def subtract(number1, number2)
 end
 
 def sum(numbers)
-  sum = 0
-  numbers.each do |number|
-    sum = sum + number
-  end
-  sum
+  return 0 if numbers == []
+  numbers.inject(:+)
 end
 
 def multiply(*numbers)
@@ -31,9 +28,7 @@ def power(number,raised_to)
 end
 
 def factorial(number)
-  if number == 0
-    return 1
-  end
+  return 1 if number == 0
   total = 1
   index = 1
   while index <= number

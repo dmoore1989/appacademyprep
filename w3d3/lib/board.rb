@@ -64,7 +64,7 @@ class Board
   def place_random_ship
     unless full?
       row = rand(@grid.length) 
-      col = rand(@grid.length)
+      col = ran d(@grid.length)
       until self[row, col] != :s
         row = rand(@grid.length) 
         col = rand(@grid.length)

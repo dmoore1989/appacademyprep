@@ -155,10 +155,10 @@ end
 
 class Array
   def my_transpose
-    col_array = []
+    col_array = Array.new (self[0].length) {Array.new}
     each_with_index do |arr, row|
       arr.each_with_index do |item, collum|
-        col_array[collum] = [] if col_array[collum].nil?
+        
         col_array[collum][row] = item
       end
     end

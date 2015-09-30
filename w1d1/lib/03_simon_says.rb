@@ -10,9 +10,7 @@ end
 
 def repeat(sentence, times = 2)
     final_string = ""
-    times.times do
-        final_string << sentence + (" ")
-    end
+    times.times {final_string << sentence + (" ")}
     final_string[0...-1]
 end
 

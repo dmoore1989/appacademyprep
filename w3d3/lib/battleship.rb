@@ -7,7 +7,8 @@ class BattleshipGame
   attr_reader :board, :player, :win_count
 
   def initialize(player, board)
-    @player = player
+    @player1 = player
+    @player2 = 
     @board = board
     @win_count = 0
   end
@@ -26,7 +27,7 @@ class BattleshipGame
   
   def play_turn(row = 10, collum = 10)
     board.display
-    puts "#{player.name} has #{count} ships remaining"
+    puts "#{player.name} has #{count} ships"
     self.attack(@player.get_play(row, collum))
     @win_count += 1
   end
@@ -57,6 +58,7 @@ if __FILE__ == $PROGRAM_NAME
   g.load_board
   until g.game_over?
     g.play_turn
+    g.switch
   end
   puts "Youre winnar!" 
   puts "It took #{g.win_count} tries!"

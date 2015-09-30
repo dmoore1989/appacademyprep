@@ -5,7 +5,7 @@ def reverser(&prc)
 end
 
 def adder(number = 1, &prc)
-  final = prc.call + number
+  prc.call + number
 end
 
 def repeater(repeat_count = 1, &prc)
